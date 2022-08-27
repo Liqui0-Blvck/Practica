@@ -1,0 +1,14 @@
+SELECT TR.TOTAL,
+       PR.NOMBRE "PROVEEDOR",
+       TO_CHAR((TR.TOTAL / IT.CANTIDAD), '$9G999') "VALOR UNITARIO"
+FROM TRANSACCION TR JOIN item IT
+ON tr.id_transaccion = it.transaccion_id
+JOIN EVENTO EV
+ON it.evento_id = ev.id_evento
+JOIN actividad AC
+ON ev.actividad_id = ac.id_actividad
+JOIN PROVEEDOR PR
+ON ac.proveedor_id = pr.id_proveedor
+WHERE ac.id_actividad IN (1,2,3)
+ORDER BY TR.TOTAL DESC;
+
